@@ -40,12 +40,13 @@ func pattern{bitwise_ptr: BitwiseBuiltin*, range_check_ptr}(
     // shift n >> 1, remainder is the old LSB
     let (new_n, lsb) = unsigned_div_rem(n,2);
     
-    // if old LSB XOR new LSB == 1 means that they are different and we call the recursion
+    
     // compute new lsb new_n AND 1
     let (new_lsb) = bitwise_and(new_n,1);
     // evaluate if patern matches lsb XOR new_lsb
     let (pattern_match) = bitwise_xor(lsb, new_lsb);
-
+    
+    // if old LSB XOR new LSB == 1 means that they are different and we call the recursion
     if (pattern_match == 1){
         if(n!=0){
             let (ret_val) = pattern(n = new_n, idx = 1, exp=0, broken_chain=0);
